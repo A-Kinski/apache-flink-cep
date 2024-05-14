@@ -1,5 +1,6 @@
 package ru.beeline.dgt.maven;
 
+import java.time.Duration;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,11 @@ public class Main {
 
                 //неверный порядок, ожидаемый результат - ничего
                 Pair.of(3, "a"), Pair.of(3, "b"), Pair.of(3, "d"),
-                Pair.of(3, "c"), Pair.of(3, "e")
+                Pair.of(3, "c"), Pair.of(3, "e"),
+
+                //Нет начального события
+                Pair.of(4, "b"), Pair.of(4, "c"),
+                Pair.of(4, "d"), Pair.of(4, "e")
         ));
 
         Pattern<Pair<Integer, String>, ?> cepPattern = Pattern.<Pair<Integer, String>>begin("a", AfterMatchSkipStrategy.skipPastLastEvent())
@@ -50,7 +55,7 @@ public class Main {
             public void processMatch(Map<String, List<Pair<Integer, String>>> match, Context ctx, Collector<String> out)
                     throws Exception {
                 String outString = match.values().stream().flatMap(Collection::stream).map(Pair::getValue).collect(
-                        Collectors.joining());
+                        Collectors.joining()) + match.get("a").get(0).getKey();
                 out.collect(outString);
             }
         });
