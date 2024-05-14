@@ -1,6 +1,5 @@
 package ru.beeline.dgt.maven;
 
-import java.time.Duration;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -54,8 +53,9 @@ public class Main {
             @Override
             public void processMatch(Map<String, List<Pair<Integer, String>>> match, Context ctx, Collector<String> out)
                     throws Exception {
-                String outString = match.values().stream().flatMap(Collection::stream).map(Pair::getValue).collect(
-                        Collectors.joining()) + match.get("a").get(0).getKey();
+                String outString = match.values().stream()
+                        .flatMap(Collection::stream).map(Pair::getValue).collect(Collectors.joining())
+                        + match.get("a").get(0).getKey();
                 out.collect(outString);
             }
         });
