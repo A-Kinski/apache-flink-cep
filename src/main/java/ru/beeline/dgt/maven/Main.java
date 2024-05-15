@@ -22,19 +22,19 @@ public class Main {
         // Set up the streaming execution environment
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         DataStream<Pair<Integer, String>> inputStream = env.fromData(List.of(
-                //ожидаемый результат - abcde
+                //expected result - abcde
                 Pair.of(1,"a"), Pair.of(1,"b"), Pair.of(1, "c"),
                 Pair.of(1, "d"), Pair.of(1, "e"),
 
-                //ожидаемый результат - abbcde
+                //expected result - abbcde
                 Pair.of(2, "a"), Pair.of(2, "b"), Pair.of(2, "b"),
                 Pair.of(2, "c"), Pair.of(2, "d"), Pair.of(2, "e"),
 
-                //неверный порядок, ожидаемый результат - ничего
+                //wrong order, nothing in result
                 Pair.of(3, "a"), Pair.of(3, "b"), Pair.of(3, "d"),
                 Pair.of(3, "c"), Pair.of(3, "e"),
 
-                //Нет начального события
+                //start event missing, empty result
                 Pair.of(4, "b"), Pair.of(4, "c"),
                 Pair.of(4, "d"), Pair.of(4, "e")
         ));
