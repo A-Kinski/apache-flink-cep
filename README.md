@@ -1,6 +1,5 @@
 [По-русски](docs_rus/README.md) | **In english**
 
-Тестовый проект для работы с паттернами Apache Flink CEP
 Test Project for Apache Flink CEP Pattern
 
 # Test pattern:
